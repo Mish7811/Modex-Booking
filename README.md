@@ -1,42 +1,33 @@
 # Modex Booking System
 
-A full-stack appointment booking system with concurrency-safe booking using PostgreSQL transactions.
+A full-stack **concurrency-safe booking platform** built with PostgreSQL, Express.js and React.  
+The system prevents **double booking** using database-level row locking and ACID-compliant transactions.
 
-## Features
-- Create doctors and appointment slots (Admin)
-- View available and booked slots
-- Book appointments safely under concurrent access
-- Prevents double-booking using database-level locking
+This project demonstrates:
+- Strong backend architecture
+- Original reasoning about concurrency and correctness
+- Clean, scalable code structure
+- Real-world deployment (Vercel + Railway)
 
-## Tech Stack
-- Frontend: React + Vite + TypeScript
-- Backend: Node.js + Express
-- Database: PostgreSQL
-- Deployment: Vercel (Frontend), Railway (Backend & DB)
+---
 
-## Architecture
-- Frontend communicates with backend via REST APIs
-- Backend uses PostgreSQL transactions and `SELECT FOR UPDATE`
-- Slot booking is atomic and concurrency-safe
+## 🚀 Live Demo
 
-## API Endpoints
-- GET /slots
-- POST /book/:slotId
-- POST /admin/doctor
-- POST /admin/slot
+**Frontend:** https://modex-booking-kr3cvzrcl-mishals-projects-e285a552.vercel.app/  
+**Backend:** https://modex-booking-production.up.railway.app/
 
-## Concurrency Handling
-Slot booking is implemented inside a database transaction.
-The slot row is locked using `SELECT FOR UPDATE` to ensure only one booking can succeed.
+---
 
-## Live Demo
-- Frontend: <Vercel URL>
-- Backend: <Railway URL>
+## 🎯 Problem Statement
 
-## How to Run Locally
+Design a booking system that allows **multiple users to book limited slots** (e.g., appointments).  
+The key challenge:  
+> Prevent **race conditions** and **double booking** when two users try to book the same slot at the same time.
 
-### Backend
-```bash
-cd backend
-npm install
-npm run start
+Many naive implementations fail because they:
+- Only check `isBooked` and update afterward
+- Do not use transactions
+- Do not handle concurrent requests safely
+
+This system solves the problem using **PostgreSQL row locking** with:
+
