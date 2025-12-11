@@ -79,14 +79,14 @@ SQL / Transactions
 ## 💾 Database Schema
 
 ### `doctors`
-| Field | Type | Notes |
-|-------|--------|------|
+| Field | Type |
+|-------|--------|
 | id | SERIAL PK |
 | name | TEXT |
 
 ### `slots`
-| Field | Type | Notes |
-|-------|--------|------|
+| Field | Type |
+|-------|--------|
 | id | SERIAL PK |
 | doctor_id | INT FK |
 | start_time | TIMESTAMP |
@@ -94,8 +94,8 @@ SQL / Transactions
 | expires_at | TIMESTAMP (optional enhancement) |
 
 ### `bookings`
-| Field | Type | Notes |
-|-------|--------|------|
+| Field | Type |
+|-------|--------|
 | id | SERIAL PK |
 | slot_id | INT FK |
 | user_id | INT |
