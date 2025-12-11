@@ -102,6 +102,9 @@ SQL / Transactions
 | status | CONFIRMED / FAILED |
 | created_at | TIMESTAMP |
 
+ > PK -> Primary Key
+ > FK - Foreign Key
+
 ---
 
 ## 🔒 Concurrency Handling Explained
