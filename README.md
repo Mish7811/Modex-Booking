@@ -5,7 +5,7 @@ The system prevents **double booking** using database-level row locking and ACID
 
 This project demonstrates:
 - Strong backend architecture
-- Original reasoning about concurrency and correctness
+- Own reasoning about concurrency and correctness
 - Clean, scalable code structure
 - Real-world deployment (Vercel + Railway)
 
@@ -103,7 +103,7 @@ SQL / Transactions
 | created_at | TIMESTAMP |
 
  > PK -> Primary Key
- 
+
  > FK - Foreign Key
 
 ---
