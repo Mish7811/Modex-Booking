@@ -119,75 +119,58 @@ IF is_booked = FALSE:
 ELSE:
     INSERT INTO bookings ... status='FAILED';
 COMMIT;
-Why this is correct
+```
 
-Only one transaction can hold the lock at a time
+Why this is correct?
+- Only one transaction can hold the lock at a time
+- Prevents double booking
+- Ensures consistency under load
+- Works even if multiple servers hit the DB concurrently
 
-Prevents double booking
-
-Ensures consistency under load
-
-Works even if multiple servers hit the DB concurrently
-
-📡 API Endpoints
-GET /slots
-
+## 📡 API Endpoints
+```GET /slots```
 Returns all appointment slots.
 
-POST /book/:slotId
-
+```POST /book/:slotId```
 Request:
-
 {
   "user_id": 101
 }
 
-
 Responses:
+- 200 CONFIRMED
+- 409 FAILED - already booked
+- 404 slot not found
 
-200 CONFIRMED
-
-409 FAILED - already booked
-
-404 slot not found
-
-POST /admin/doctor
-
+```POST /admin/doctor```
 Request:
-
 { "name": "Dr. Mike" }
 
-POST /admin/slot
-
+```POST /admin/slot```
 Request:
-
 {
   "doctor_id": 1,
   "start_time": "2025-12-12T10:00:00Z"
 }
 
-🖥️ Running Locally
-Backend
-cd backend
+## 🖥️ Running Locally
+#### Backend
+```cd backend
 npm install
 npm run dev
-
-
-Environment:
-
+```
+##### Environment:
 DATABASE_URL=postgres://...
 
-Frontend
-cd frontend
+#### Frontend
+```cd frontend
 npm install
 npm run dev
-
-
-Environment:
-
+```
+##### Environment:
 VITE_API_BASE_URL=http://localhost:4000
 
-📘 Booking Expiry (Design Enhancement)
+## 📘 Booking Expiry (Design Enhancement)
 
 Real booking systems require temporary holds.
 This design supports adding:
