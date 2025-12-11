@@ -103,6 +103,7 @@ SQL / Transactions
 | created_at | TIMESTAMP |
 
  > PK -> Primary Key
+ 
  > FK - Foreign Key
 
 ---
