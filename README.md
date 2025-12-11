@@ -160,7 +160,7 @@ npm install
 npm run dev
 ```
 ##### Environment:
-DATABASE_URL=postgres://...
+`DATABASE_URL=postgres://...`
 
 #### Frontend
 ```cd frontend
@@ -168,41 +168,30 @@ npm install
 npm run dev
 ```
 ##### Environment:
-VITE_API_BASE_URL=http://localhost:4000
+`VITE_API_BASE_URL=http://localhost:4000`
 
 ## 📘 Booking Expiry (Design Enhancement)
 
 Real booking systems require temporary holds.
 This design supports adding:
+- expires_at TIMESTAMP on slots
+- A cleaner to release expired reservations
+- Expiry checks inside the booking transaction
+- This ensures abandoned bookings dont block availability.
 
-expires_at TIMESTAMP on slots
+## 📈 Scalability Considerations
 
-A cleaner to release expired reservations
+- Horizontal API scaling is safe (locking is DB-level)
+- Partitioning slots per doctor for performance
+- Caching non-booked slots via Redis
+- Queue-based async job processing for confirmations
 
-Expiry checks inside the booking transaction
-
-This ensures abandoned bookings dont block availability.
-
-📈 Scalability Considerations
-
-Horizontal API scaling is safe (locking is DB-level)
-
-Partitioning slots per doctor for performance
-
-Caching non-booked slots via Redis
-
-Queue-based async job processing for confirmations
-
-✨ Conclusion
+## ✨ Conclusion
 
 This project demonstrates:
-
-Original architectural reasoning
-
-Correct handling of concurrency using DB transactions
-
-Clean backend and frontend design
-
-Real deployment readiness
+- Individual architectural reasoning
+- Correct handling of concurrency using DB transactions
+- Clean backend and frontend design
+- Real deployment readiness
 
 The central innovation is guaranteeing correctness under concurrent traffic.
